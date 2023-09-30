@@ -1,0 +1,12 @@
+#ifndef INTTEMPLATE_PROCESSUTILS_H
+#define INTTEMPLATE_PROCESSUTILS_H
+
+
+#include "main.h"
+
+HWND GetDeviceWindow();
+
+BOOL CALLBACK EnumWind(HWND Handle, LPARAM lp);
+
+
+#endif //INTTEMPLATE_PROCESSUTILS_H
