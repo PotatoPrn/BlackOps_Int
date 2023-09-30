@@ -79,3 +79,13 @@ uintptr_t Mem::PatternScanModule(char* Module, char* Pattern, char* Mask)
 
 	return (uintptr_t)Match;
 }
+
+/// Write Byte
+void Mem::PatchByte(BYTE* Dst, BYTE* Src, unsigned int Size)
+{
+	DWORD oProc;
+
+	VirtualProtect(Dst, Size, PAGE_EXECUTE_READWRITE, &oProc);
+	memcpy(Dst, Src, Size);
+	VirtualProtect(Dst, Size, oProc, &oProc);
+}

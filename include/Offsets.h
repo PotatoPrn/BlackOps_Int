@@ -22,10 +22,22 @@ class PlayerEntity
 public:
 	union
 	{
+		DEFINE_MEMBER_N(Vec3, PlayerPos, 0x18);
+		DEFINE_MEMBER_N(Vec3, ViewAngle, 0x3c);
+		DEFINE_MEMBER_N(int, Health, 0x184);
+		DEFINE_MEMBER_N(int, PosTeam, 0x774);
 
 	};
-
 };
+
+struct GameOffset
+{
+public:
+	uintptr_t GamePoints = 0x180A6C8;
+	uintptr_t AmmoFunction = 0x2979B0;
+};
+
+extern GameOffset GOffset;
 
 
 #endif //INTTEMPLATE_OFFSETS_H

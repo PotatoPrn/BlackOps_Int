@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(IntTemplate)
+project(Blops_Internal)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -12,6 +12,7 @@ add_library(${PROJECT_NAME} SHARED main.cpp
         src/MainHackThread.cpp
         src/Utils/HelperUtils.cpp
         src/Utils/ProcessUtils.cpp
+        src/HackList.cpp
 
 
 )

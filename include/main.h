@@ -13,6 +13,8 @@
 #include "Utils/MemUtils.h"
 #include "Utils/UiUtils.h"
 #include "MainHackThread.h"
+#include "HackList.h"
+
 
 // Offsets
 #include "Offsets.h"

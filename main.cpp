@@ -3,8 +3,7 @@
 // Setup Structs
 GameHack HackClass;
 EnabledHacks THacks;
-
-
+GameOffset GOffset;
 
 
 // DLL Init Routine
@@ -48,7 +47,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 void HackSetup()
 {
 	// Setup Target DLL Name
-	HackClass.ModuleName = "";
+	HackClass.ModuleName = "BlackOps.exe";
 
 
 	// Setup Class Variables
