@@ -10,7 +10,7 @@ void CALLBACK PointHack();
 
 void CALLBACK AmmoHack();
 
-
+void CALLBACK TestingHack();
 
 
 

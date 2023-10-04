@@ -7,6 +7,8 @@
 namespace FPSUtil
 {
 	float DistanceDif(Vec3 Dst, Vec3 Src);
+
+	bool VerifyEntity(PlayerEntity* Entity);
 }
 
 

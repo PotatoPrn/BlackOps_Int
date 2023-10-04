@@ -15,5 +15,18 @@ float FPSUtil::DistanceDif(Vec3 Dst, Vec3 Src)
 	return Distance;
 }
 
+bool FPSUtil::VerifyEntity(PlayerEntity* Entity)
+{
+	if (Entity == NULL)
+		return FALSE;
+
+	if (Entity->Health == 0)
+		return FALSE;
+
+	return TRUE;
+
+
+}
+
 
 #endif //INTTEMPLATE_HELPERUTILS_CPP
