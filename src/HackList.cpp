@@ -25,18 +25,16 @@ void CALLBACK AmmoHack()
 		Mem::PatchByte((BYTE*)(HackClass.ModuleBase + GOffset.AmmoFunction), (BYTE*)"\xC3", 1);
 }
 
-void CALLBACK TestingHack()
+void CALLBACK InstaKillHack()
 {
 	int EntityCount = *(int*)(HackClass.ModuleBase + GOffset.EntCount);
-
-	std::cout << EntityCount << "\n";
 
 	for (unsigned int i = 1; i < EntityCount + 1; i++)
 	{
 		PlayerEntity* Entity = *(PlayerEntity**)(HackClass.ModuleBase + GOffset.EntList + i * 0x8c); // Works
 
-		if (FPSUtil::VerifyEntity(Entity) && HackClass.PlayerObject->PosTeam != Entity->PosTeam);
-		std::cout << Entity->Health << "\n";
+		if (FPSUtil::VerifyEntity(Entity));
+			Entity->Health = 1;
 	}
 }
 

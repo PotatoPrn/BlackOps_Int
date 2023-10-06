@@ -15,6 +15,7 @@ public:
 	bool T_Health = false;
 	bool T_Point = false;
 	bool T_Ammo = false;
+	bool T_IKill = false;
 
 };
 

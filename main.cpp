@@ -5,6 +5,23 @@ GameHack HackClass;
 EnabledHacks THacks;
 GameOffset GOffset;
 
+// Directx9 Dummy Driver
+LPDIRECT3DDEVICE9 pDevice = nullptr;
+void* D3D9Device[119];
+BYTE EndSceneByte[7] {0};
+tEndScene oEndScene = nullptr;
+
+
+void APIENTRY hkEndScene(LPDIRECT3DDEVICE9 o_pDevice)
+{
+	if (!pDevice)
+		pDevice = o_pDevice;
+
+	HackThread();
+
+	oEndScene(pDevice);
+}
+
 
 // DLL Init Routine
 void InitHack(HMODULE hModule)
@@ -15,8 +32,26 @@ void InitHack(HMODULE hModule)
 	FILE* fHandle;
 	freopen_s(&fHandle, "CONOUT$", "w", stdout);
 
-	// Begin Hack Routine
-	HackSetup();
+	/// Setup Hack hook Here
+	if (InitD3D9(D3D9Device, sizeof(D3D9Device)))
+	{
+		// Cpy original Bytes to storage buffer
+		memcpy_s(EndSceneByte, 7, (char*)D3D9Device[42], 7);
+
+		// Setup Hack
+		HackSetup();
+
+		/// Patch EndScene to hack function
+		oEndScene = (tEndScene)Hook::TrampHook((char*)D3D9Device[42], (char*)hkEndScene, 7);
+	}
+
+
+	while (!GetAsyncKeyState(VK_DELETE))
+		Sleep(1);
+
+	/// Fix patched bytes
+	Mem::PatchByte((BYTE*)D3D9Device[42], EndSceneByte, 7);
+
 
 	// Eject DLL
 	fclose(fHandle);
@@ -59,9 +94,6 @@ void HackSetup()
 	// Setup Console
 	UI::ClearConsole();
 	UI::SetupConsole();
-
-	// Main Hack Routine
-	HackThread();
 
 	return;
 }
