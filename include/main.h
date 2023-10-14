@@ -25,7 +25,7 @@ extern LPDIRECT3DDEVICE9 pDevice;
 #include "HackList.h"
 #include "GraphicsUtils/Directx.h"
 #include "Utils/HookUtil.h"
-
+#include "GraphicsUtils/Draw.h"
 
 // Offsets
 #include "Offsets.h"
@@ -34,13 +34,25 @@ struct GameHack
 {
 public:
 	const char* ModuleName;
-	HWND Window;
-	int WindowWidth, WindowLength;
 	uintptr_t ModuleBase;
 	PlayerEntity* PlayerObject;
+	RefDef_t* RefDef_C;
 };
 
 extern GameHack HackClass;
+
+struct Graphics
+{
+public:
+	HWND Window;
+	int WindowWidth, WindowHeight;
+	ID3DXLine* LineL;
+	ID3DXFont* FontF;
+};
+
+extern Graphics GHack;
+
+
 
 
 void InitHack(HMODULE hModule);

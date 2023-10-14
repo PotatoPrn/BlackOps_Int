@@ -4,11 +4,12 @@
 GameHack HackClass;
 EnabledHacks THacks;
 GameOffset GOffset;
+Graphics GHack;
 
 // Directx9 Dummy Driver
 LPDIRECT3DDEVICE9 pDevice = nullptr;
 void* D3D9Device[119];
-BYTE EndSceneByte[7] {0};
+BYTE EndSceneByte[7]{ 0 };
 tEndScene oEndScene = nullptr;
 
 
@@ -16,6 +17,8 @@ void APIENTRY hkEndScene(LPDIRECT3DDEVICE9 o_pDevice)
 {
 	if (!pDevice)
 		pDevice = o_pDevice;
+
+	DrawTextF("This is a Test Hack", GHack.WindowWidth / 2, GHack.WindowHeight - 60, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	HackThread();
 
@@ -52,8 +55,16 @@ void InitHack(HMODULE hModule)
 	/// Fix patched bytes
 	Mem::PatchByte((BYTE*)D3D9Device[42], EndSceneByte, 7);
 
+	/// This sleep is essential when ejecting as it prevents actions from occurring while ejecting which causes the game to crash
+	Sleep(1000);
 
-	// Eject DLL
+	/// GHack.LineL->Release();
+	GHack.FontF->Release();
+
+	THacks.Destructor();
+
+
+	/// Eject DLL
 	fclose(fHandle);
 	FreeConsole();
 	FreeLibraryAndExitThread(hModule, 0);
@@ -86,7 +97,8 @@ void HackSetup()
 
 
 	// Setup Class Variables
-	do {
+	do
+	{
 		HackClass.ModuleBase = (uintptr_t)GetModuleHandleA(HackClass.ModuleName);
 	} while (HackClass.ModuleName == NULL);
 

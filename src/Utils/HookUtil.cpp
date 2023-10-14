@@ -10,8 +10,6 @@ bool Hook::Hook(char* Src, char* Dst, int Len)
 	if (Len < 5)
 		return FALSE;
 
-	std::cout << (unsigned int)Src << std::endl << (unsigned int) Dst << std::endl;
-
 	DWORD oProc;
 
 	VirtualProtect(Src, Len, PAGE_EXECUTE_READWRITE, &oProc);

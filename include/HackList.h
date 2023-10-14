@@ -12,6 +12,8 @@ void CALLBACK AmmoHack();
 
 void CALLBACK InstaKillHack();
 
+void CALLBACK ESPHack();
+
 
 
 

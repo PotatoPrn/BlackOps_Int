@@ -7,16 +7,16 @@
 /// Get Current Window's Handle ID
 HWND GetDeviceWindow()
 {
-	HackClass.Window = NULL;
+	GHack.Window = NULL;
 
 	EnumWindows(EnumWind, NULL);
 
 	RECT Size;
-	GetWindowRect(HackClass.Window, &Size);
-	HackClass.WindowWidth = Size.right - Size.left;
-	HackClass.WindowLength = Size.bottom - Size.top;
+	GetWindowRect(GHack.Window, &Size);
+	GHack.WindowWidth = Size.right - Size.left;
+	GHack.WindowHeight = Size.bottom - Size.top;
 
-	return HackClass.Window;
+	return GHack.Window;
 }
 
 BOOL CALLBACK EnumWind(HWND Handle, LPARAM lp)
@@ -30,7 +30,7 @@ BOOL CALLBACK EnumWind(HWND Handle, LPARAM lp)
 	if (Handle == GetConsoleWindow())
 		return TRUE;
 
-	HackClass.Window = Handle;
+	GHack.Window = Handle;
 	return FALSE;
 }
 

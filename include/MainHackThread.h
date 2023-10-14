@@ -16,6 +16,12 @@ public:
 	bool T_Point = false;
 	bool T_Ammo = false;
 	bool T_IKill = false;
+	bool T_ESP = false;
+
+	void Destructor()
+	{
+		T_Health = T_Point = T_Ammo = T_IKill = T_ESP = false;
+	}
 
 };
 
