@@ -17,12 +17,7 @@ public:
 	bool T_Ammo = false;
 	bool T_IKill = false;
 	bool T_ESP = false;
-
-	void Destructor()
-	{
-		T_Health = T_Point = T_Ammo = T_IKill = T_ESP = false;
-	}
-
+	bool T_RapidFire = false;
 };
 
 extern EnabledHacks THacks;

@@ -3,6 +3,8 @@
 
 #include "main.h"
 
+#define MaxEnt 32
+
 
 void CALLBACK HealthHack();
 
@@ -13,6 +15,8 @@ void CALLBACK AmmoHack();
 void CALLBACK InstaKillHack();
 
 void CALLBACK ESPHack();
+
+void CALLBACK RapidFire();
 
 
 

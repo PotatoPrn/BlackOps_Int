@@ -28,9 +28,8 @@ void CALLBACK AmmoHack()
 
 void CALLBACK InstaKillHack()
 {
-	int EntityCount = *(int*)(HackClass.ModuleBase + GOffset.EntCount);
 
-	for (unsigned int i = 1; i < EntityCount + 1; i++)
+	for (unsigned int i = 1; i < MaxEnt + 1; i++)
 	{
 		PlayerEntity* Entity = *(PlayerEntity**)(HackClass.ModuleBase + GOffset.EntList + i * 0x8c); // Works
 
@@ -43,13 +42,11 @@ void CALLBACK InstaKillHack()
 void CALLBACK ESPHack()
 {
 
-	int EntityCount = *(int*)(HackClass.ModuleBase + GOffset.EntCount);
-
-	for (unsigned int i = 0; i < EntityCount; i++)
+	for (unsigned int i = 0; i < MaxEnt; i++)
 	{
 		PlayerEntity* Entity = *(PlayerEntity**)(HackClass.ModuleBase + GOffset.EntList + i * 0x8c);
 
-		if (FPSUtil::VerifyEntity(Entity))
+		if (FPSUtil::VerifyEntity(Entity) && Entity->TeamVal != HackClass.PlayerObject->TeamVal)
 		{
 			D3DCOLOR Color;
 
@@ -58,17 +55,25 @@ void CALLBACK ESPHack()
 			else
 				Color = D3DCOLOR_ARGB(255, 0, 255, 0);
 
-			Vec2 EntPos2D;
+			Vec2 EntPos2D = {0, 0};
 
 			Vec3 EntPos3D = Entity->ZombiePos;
 
 
-			if (FPSUtil::World2Screen(EntPos3D, EntPos2D)) /// ahhhhh
+			if (FPSUtil::World2Screen(EntPos3D, EntPos2D))
 			{
 				DrawLine(EntPos2D.x, EntPos2D.y, GHack.WindowWidth / 2, GHack.WindowHeight - 20, 2, Color);
 			}
 		}
 	}
 }
+
+
+void CALLBACK RapidFire()
+{
+	if (HackClass.PlayerObject->LocalEnt->PlayerStatus == 0x50)
+		HackClass.PlayerObject->LocalEnt->TimeToShoot = 10;
+}
+
 
 #endif //BLOPS_INTERNAL_HACKLIST_CPP

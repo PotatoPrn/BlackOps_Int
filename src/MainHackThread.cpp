@@ -51,8 +51,12 @@ void HackThread()
 		if (GetAsyncKeyState(VK_F5) & 1)
 			THacks.T_IKill = !THacks.T_IKill;
 
+		/// ESP Hack
 		if (GetAsyncKeyState(VK_F4) & 1)
 			THacks.T_ESP = !THacks.T_ESP;
+
+		if (GetAsyncKeyState(VK_F3) & 1)
+			THacks.T_RapidFire = !THacks.T_RapidFire;
 
 		/// Active Hacks
 		// Continuous Write
@@ -69,17 +73,20 @@ void HackThread()
 		if (THacks.T_ESP)
 			ESPHack();
 
+		if (THacks.T_RapidFire)
+			RapidFire();
+
 
 		/// Display Commands...
-		/*
 		DbgPrint(F10, Invincible, THacks.T_Health);
 		DbgPrint(F9, Infinite Point, THacks.T_Point);
 		DbgPrint(F8, Infinite Ammo, THacks.T_Ammo);
 		PosPrint(F7, Save Waypoint >, SavedPos.x, SavedPos.y, SavedPos.z);
 		DbgPrint(F6 / Shift + F6, Teleport to waypoint / Return to Prev Waypoint, 0);
 		DbgPrint(F5, InstaKill Hack, THacks.T_IKill);
-		 */
 		DbgPrint(F4, ESP Hack, THacks.T_ESP);
+		DbgPrint(F3, RapidFire, THacks.T_RapidFire);
+
 
 		UI::ClearConsole();
 

@@ -31,7 +31,7 @@ class LocalPlayerEnt
 public:
 	union
 	{
-		DEFINE_MEMBER_N(int, PlayerStatus, 0xc); // 0 = Normal, 2 = Crouch, 1 = Prone, 80 = Aimdown
+		DEFINE_MEMBER_N(int8_t, PlayerStatus, 0xc); // 0 = Normal, 2 = Crouch, 1 = Prone, 80 = Aimdown
 		DEFINE_MEMBER_N(bool, IsRunning, 0xD); // 40 = Jump, 80 = Sprint
 		DEFINE_MEMBER_N(Vec3, PlayerPos, 0x24);
 		DEFINE_MEMBER_N(Vec3, Acceleration, 0x30);

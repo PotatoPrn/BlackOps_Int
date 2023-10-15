@@ -22,7 +22,7 @@ bool FPSUtil::VerifyEntity(PlayerEntity* Entity)
 	if (Entity == NULL)
 		return FALSE;
 
-	if (Entity->Health == 0)
+	if (Entity->Health <= 0)
 		return FALSE;
 
 	return TRUE;
@@ -36,33 +36,21 @@ float FPSUtil::DotProduct(Vec3 Dst, Vec3 Src)
 
 bool FPSUtil::World2Screen(Vec3 Pos, Vec2& Screen)
 {
-	/// Game uses 3 x 4 view matrix
-	int Width = HackClass.RefDef_C->Width / 2;
-	int Height = HackClass.RefDef_C->Height / 2;
+	Vec3 Transform, vLocal;
 
+	vLocal = Pos - HackClass.RefDef_C->ViewOrigin;
 
-	Vec3 Transform;
-	Vec3 LRAxis = HackClass.RefDef_C->ViewAxis[0]; // Left & Right
-	Vec3 UDAxis = HackClass.RefDef_C->ViewAxis[1]; // Up & Down
-	Vec3 FBAxis = HackClass.RefDef_C->ViewAxis[2]; // Forward & Backwards
+	Transform.x = DotProduct(vLocal, HackClass.RefDef_C->ViewAxis[1]); // X (L & R)
+	Transform.y = DotProduct(vLocal, HackClass.RefDef_C->ViewAxis[2]); // Y (U & D)
+	Transform.z = DotProduct(vLocal, HackClass.RefDef_C->ViewAxis[0]); // Z (F & B)
 
-	Vec2 Fov;
-	Fov.x = HackClass.RefDef_C->FOV.x;
-	Fov.y = HackClass.RefDef_C->FOV.y;
-
-	Transform = (HackClass.RefDef_C->ViewOrigin - Pos);
-
-	float z = FPSUtil::DotProduct(Transform, LRAxis);
-
-	if (z <= 0.01f)
+	if (Transform.z < 0.01f) // Ensure the camera isnt behind the player
 		return false;
 
-	Screen.x = Width - DotProduct(Transform, UDAxis) * Width / (z * Fov.x);
-	Screen.y = Height - DotProduct(Transform, FBAxis) * Height / (z * Fov.y);
-
+	Screen.x = ((HackClass.RefDef_C->Width / 2) * (1 - (Transform.x / HackClass.RefDef_C->FOV.x / Transform.z)));
+	Screen.y = ((HackClass.RefDef_C->Height / 2) * (1 - (Transform.y / HackClass.RefDef_C->FOV.y / Transform.z)));
 
 	return true;
-
 }
 
 #endif //INTTEMPLATE_HELPERUTILS_CPP

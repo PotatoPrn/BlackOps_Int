@@ -52,16 +52,15 @@ void InitHack(HMODULE hModule)
 	while (!GetAsyncKeyState(VK_DELETE))
 		Sleep(1);
 
-	/// Fix patched bytes
-	Mem::PatchByte((BYTE*)D3D9Device[42], EndSceneByte, 7);
-
 	/// This sleep is essential when ejecting as it prevents actions from occurring while ejecting which causes the game to crash
 	Sleep(1000);
 
-	/// GHack.LineL->Release();
+	/// Fix patched bytes
+	Mem::PatchByte((BYTE*)D3D9Device[42], EndSceneByte, 7);
+
+	GHack.LineL->Release();
 	GHack.FontF->Release();
 
-	THacks.Destructor();
 
 
 	/// Eject DLL
