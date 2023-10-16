@@ -16,47 +16,57 @@ void HackThread()
 
 	if (HackClass.PlayerObject)
 	{
-		/// Increase Health and Continuous Write
-		if (GetAsyncKeyState(VK_F10) & 1)
-			THacks.T_Health = !THacks.T_Health;
 
-		/// Increase Points and continuous Write
-		if (GetAsyncKeyState(VK_F9) & 1)
-			THacks.T_Point = !THacks.T_Point;
+		/// Show Menu
+		if (GetAsyncKeyState(VK_F1) & 1)
+			THacks.T_ShowMenu = !THacks.T_ShowMenu;
 
-		/// Enable Ammo Hack
-		if (GetAsyncKeyState(VK_F8) & 1)
+		/// Prevent Hacks from toggling when menu is disabled
+		if (THacks.T_ShowMenu)
 		{
-			THacks.T_Ammo = !THacks.T_Ammo;
-			AmmoHack();
-		}
+			/// Increase Health and Continuous Write
+			if (GetAsyncKeyState(VK_F10) & 1)
+				THacks.T_Health = !THacks.T_Health;
 
-		/// Save Current Coords
-		if (GetAsyncKeyState(VK_F7) & 1)
-			SavedPos = HackClass.PlayerObject->LocalEnt->PlayerPos;
+			/// Increase Points and continuous Write
+			if (GetAsyncKeyState(VK_F9) & 1)
+				THacks.T_Point = !THacks.T_Point;
 
-		/// If Alt is Engaged while F6, Teleport to Prev Pos, Else Teleport to New Pos
-		if (GetAsyncKeyState(VK_F6) & 1)
-		{
-			if (!GetAsyncKeyState(VK_MENU) & 1)
+			/// Enable Ammo Hack
+			if (GetAsyncKeyState(VK_F8) & 1)
 			{
-				PrevPos = HackClass.PlayerObject->LocalEnt->PlayerPos;
-				HackClass.PlayerObject->LocalEnt->PlayerPos = SavedPos;
+				THacks.T_Ammo = !THacks.T_Ammo;
+				AmmoHack();
 			}
-			else
-				HackClass.PlayerObject->LocalEnt->PlayerPos = PrevPos;
+
+			/// Save Current Coords
+			if (GetAsyncKeyState(VK_F7) & 1)
+				SavedPos = HackClass.PlayerObject->LocalEnt->PlayerPos;
+
+			/// If Alt is Engaged while F6, Teleport to Prev Pos, Else Teleport to New Pos
+			if (GetAsyncKeyState(VK_F6) & 1)
+			{
+				if (!GetAsyncKeyState(VK_MENU) & 1)
+				{
+					PrevPos = HackClass.PlayerObject->LocalEnt->PlayerPos;
+					HackClass.PlayerObject->LocalEnt->PlayerPos = SavedPos;
+				}
+				else
+					HackClass.PlayerObject->LocalEnt->PlayerPos = PrevPos;
+			}
+
+			/// Disabled as it breaks the game :/
+			//if (GetAsyncKeyState(VK_F5) & 1)
+				//THacks.T_IKill = !THacks.T_IKill;
+
+			/// ESP Hack
+			if (GetAsyncKeyState(VK_F4) & 1)
+				THacks.T_ESP = !THacks.T_ESP;
+
+			if (GetAsyncKeyState(VK_F3) & 1)
+				THacks.T_RapidFire = !THacks.T_RapidFire;
 		}
 
-		/// Reduce all the zombies to 1 hp
-		if (GetAsyncKeyState(VK_F5) & 1)
-			THacks.T_IKill = !THacks.T_IKill;
-
-		/// ESP Hack
-		if (GetAsyncKeyState(VK_F4) & 1)
-			THacks.T_ESP = !THacks.T_ESP;
-
-		if (GetAsyncKeyState(VK_F3) & 1)
-			THacks.T_RapidFire = !THacks.T_RapidFire;
 
 		/// Active Hacks
 		// Continuous Write
@@ -75,6 +85,8 @@ void HackThread()
 
 		if (THacks.T_RapidFire)
 			RapidFire();
+
+
 
 
 		/// Display Commands...

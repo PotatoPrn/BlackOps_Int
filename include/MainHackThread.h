@@ -18,6 +18,13 @@ public:
 	bool T_IKill = false;
 	bool T_ESP = false;
 	bool T_RapidFire = false;
+
+	void Destructor()
+	{
+		T_Health = T_Point = T_Ammo = T_IKill = T_ESP = T_RapidFire = false;
+	}
+
+	bool T_ShowMenu = false;
 };
 
 extern EnabledHacks THacks;

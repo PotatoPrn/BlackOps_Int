@@ -20,6 +20,8 @@ void APIENTRY hkEndScene(LPDIRECT3DDEVICE9 o_pDevice)
 
 	DrawTextF("This is a Test Hack", GHack.WindowWidth / 2, GHack.WindowHeight - 60, D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	DrawMenu();
+
 	HackThread();
 
 	oEndScene(pDevice);
@@ -39,7 +41,7 @@ void InitHack(HMODULE hModule)
 	if (InitD3D9(D3D9Device, sizeof(D3D9Device)))
 	{
 		// Cpy original Bytes to storage buffer
-		memcpy_s(EndSceneByte, 7, (char*)D3D9Device[42], 7);
+		memcpy(EndSceneByte, (char*)D3D9Device[42], 7);
 
 		// Setup Hack
 		HackSetup();
@@ -52,15 +54,20 @@ void InitHack(HMODULE hModule)
 	while (!GetAsyncKeyState(VK_DELETE))
 		Sleep(1);
 
-	/// This sleep is essential when ejecting as it prevents actions from occurring while ejecting which causes the game to crash
-	Sleep(1000);
+	THacks.Destructor();
 
 	/// Fix patched bytes
 	Mem::PatchByte((BYTE*)D3D9Device[42], EndSceneByte, 7);
 
-	GHack.LineL->Release();
-	GHack.FontF->Release();
 
+
+	if (GHack.LineL != NULL)
+		GHack.LineL->Release();
+	if (GHack.FontF != NULL)
+		GHack.FontF->Release();
+
+	/// This sleep is essential when ejecting as it prevents actions from occurring while ejecting which causes the game to crash
+	Sleep(1000);
 
 
 	/// Eject DLL
