@@ -18,6 +18,8 @@ void CALLBACK ESPHack();
 
 void CALLBACK RapidFire();
 
+void CALLBACK TestFunction();
+
 
 
 

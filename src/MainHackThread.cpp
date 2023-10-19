@@ -3,7 +3,6 @@
 
 #include "MainHackThread.h"
 
-/// Teleportation Variables
 Vec3 SavedPos = { 0, 0, 0 };
 Vec3 PrevPos = { 0, 0, 0 };
 
@@ -12,7 +11,6 @@ void HackThread()
 	/// Get Required Offsets
 	HackClass.PlayerObject = *(PlayerEntity**)(HackClass.ModuleBase + 0x17FBBF8);
 	HackClass.RefDef_C = (RefDef_t*)0x29CF5530;
-
 
 	if (HackClass.PlayerObject)
 	{
@@ -56,8 +54,8 @@ void HackThread()
 			}
 
 			/// Disabled as it breaks the game :/
-			//if (GetAsyncKeyState(VK_F5) & 1)
-				//THacks.T_IKill = !THacks.T_IKill;
+			if (GetAsyncKeyState(VK_F5) & 1)
+				THacks.T_IKill = !THacks.T_IKill;
 
 			/// ESP Hack
 			if (GetAsyncKeyState(VK_F4) & 1)
@@ -86,21 +84,8 @@ void HackThread()
 		if (THacks.T_RapidFire)
 			RapidFire();
 
+		//TestFunction();
 
-
-
-		/// Display Commands...
-		DbgPrint(F10, Invincible, THacks.T_Health);
-		DbgPrint(F9, Infinite Point, THacks.T_Point);
-		DbgPrint(F8, Infinite Ammo, THacks.T_Ammo);
-		PosPrint(F7, Save Waypoint >, SavedPos.x, SavedPos.y, SavedPos.z);
-		DbgPrint(F6 / Shift + F6, Teleport to waypoint / Return to Prev Waypoint, 0);
-		DbgPrint(F5, InstaKill Hack, THacks.T_IKill);
-		DbgPrint(F4, ESP Hack, THacks.T_ESP);
-		DbgPrint(F3, RapidFire, THacks.T_RapidFire);
-
-
-		UI::ClearConsole();
 
 		// Return and Kill Console
 		return;

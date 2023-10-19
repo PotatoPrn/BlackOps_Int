@@ -38,8 +38,10 @@ bool FPSUtil::World2Screen(Vec3 Pos, Vec2& Screen)
 {
 	Vec3 Transform, vLocal;
 
+	/// Get position relative to camera
 	vLocal = Pos - HackClass.RefDef_C->ViewOrigin;
 
+	// Convert ingame View axis into camera View Axis
 	Transform.x = DotProduct(vLocal, HackClass.RefDef_C->ViewAxis[1]); // X (L & R)
 	Transform.y = DotProduct(vLocal, HackClass.RefDef_C->ViewAxis[2]); // Y (U & D)
 	Transform.z = DotProduct(vLocal, HackClass.RefDef_C->ViewAxis[0]); // Z (F & B)
@@ -47,6 +49,8 @@ bool FPSUtil::World2Screen(Vec3 Pos, Vec2& Screen)
 	if (Transform.z < 0.01f) // Ensure the camera isnt behind the player
 		return false;
 
+
+	// Convert 3D position retrieved from Transform into 2D for the screen
 	Screen.x = ((HackClass.RefDef_C->Width / 2) * (1 - (Transform.x / HackClass.RefDef_C->FOV.x / Transform.z)));
 	Screen.y = ((HackClass.RefDef_C->Height / 2) * (1 - (Transform.y / HackClass.RefDef_C->FOV.y / Transform.z)));
 

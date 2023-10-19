@@ -5,6 +5,8 @@ GameHack HackClass;
 EnabledHacks THacks;
 GameOffset GOffset;
 Graphics GHack;
+Enemy1 Enm1;
+
 
 // Directx9 Dummy Driver
 LPDIRECT3DDEVICE9 pDevice = nullptr;
@@ -18,7 +20,7 @@ void APIENTRY hkEndScene(LPDIRECT3DDEVICE9 o_pDevice)
 	if (!pDevice)
 		pDevice = o_pDevice;
 
-	DrawTextF("This is a Test Hack", GHack.WindowWidth / 2, GHack.WindowHeight - 60, D3DCOLOR_ARGB(255, 255, 255, 255));
+	DrawTextF("PotatoPrn's Black Ops Zombies >>> ENABLED <<<", GHack.WindowWidth / 2, GHack.WindowHeight - 60, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	DrawMenu();
 
@@ -33,9 +35,6 @@ void InitHack(HMODULE hModule)
 {
 
 	// Setup Output Console
-	AllocConsole();
-	FILE* fHandle;
-	freopen_s(&fHandle, "CONOUT$", "w", stdout);
 
 	/// Setup Hack hook Here
 	if (InitD3D9(D3D9Device, sizeof(D3D9Device)))
@@ -56,9 +55,9 @@ void InitHack(HMODULE hModule)
 
 	THacks.Destructor();
 
+
 	/// Fix patched bytes
 	Mem::PatchByte((BYTE*)D3D9Device[42], EndSceneByte, 7);
-
 
 
 	if (GHack.LineL != NULL)
@@ -66,13 +65,11 @@ void InitHack(HMODULE hModule)
 	if (GHack.FontF != NULL)
 		GHack.FontF->Release();
 
+
 	/// This sleep is essential when ejecting as it prevents actions from occurring while ejecting which causes the game to crash
 	Sleep(1000);
 
-
 	/// Eject DLL
-	fclose(fHandle);
-	FreeConsole();
 	FreeLibraryAndExitThread(hModule, 0);
 }
 
@@ -110,8 +107,8 @@ void HackSetup()
 
 
 	// Setup Console
-	UI::ClearConsole();
-	UI::SetupConsole();
+	//UI::ClearConsole();
+	//UI::SetupConsole();
 
 	return;
 }

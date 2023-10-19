@@ -23,7 +23,7 @@ char* BasicPatternScan(char* Base, size_t Size, char* Pattern, char* Mask)
 	{
 		bool Found = true;
 
-		for (unsigned int j = 0; i < PatternLen; i++)
+		for (unsigned int j = 0; j < PatternLen; j++)
 		{
 			if (Mask[j] != '?' && Pattern[j] != *(char*)((intptr_t)Base + i + j));
 			{

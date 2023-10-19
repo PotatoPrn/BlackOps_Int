@@ -30,6 +30,8 @@ extern LPDIRECT3DDEVICE9 pDevice;
 // Offsets
 #include "Offsets.h"
 
+
+
 struct GameHack
 {
 public:
