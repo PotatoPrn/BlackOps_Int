@@ -15,6 +15,7 @@
 struct EnabledHacks
 {
 public:
+	// Hack Menu
 	bool T_Health = false;
 	bool T_Point = false;
 	bool T_Ammo = false;
@@ -22,12 +23,11 @@ public:
 	bool T_ESP = false;
 	bool T_RapidFire = false;
 
-	void Destructor()
-	{
-		T_Health = T_Point = T_Ammo = T_IKill = T_ESP = T_RapidFire = false;
-	}
-
 	bool T_ShowMenu = false;
+	int T_MenuPage = 1;
+
+	// Customisation Menu
+	bool C_ShowBox = false;
 };
 
 extern EnabledHacks THacks;

@@ -38,7 +38,6 @@ void CALLBACK InstaKillHack()
 		{
 			Entity->Health = 1;
 		}
-
 	}
 }
 
@@ -71,11 +70,15 @@ void CALLBACK ESPHack()
 			{
 				DrawLine(EntPos2D.x, EntPos2D.y, GHack.WindowWidth / 2, GHack.WindowHeight - 20, 2, Color);
 
-				if (FPSUtil::World2Screen(EntPos3DHead, EntHead2D))
+				if (THacks.C_ShowBox)
 				{
-					DrawESPBox(EntPos2D, EntHead2D, 2,
-							Color); /// todo Determine if enemy is a crawler, dog, or zombie as height is different
+					if (FPSUtil::World2Screen(EntPos3DHead, EntHead2D))
+					{
+						DrawESPBox(EntPos2D, EntHead2D, 2,
+								Color); /// todo Determine if enemy is a crawler, dog, or zombie as height is different
+					}
 				}
+
 
 				std::stringstream s1, s2;
 				s1 << Entity->Health;

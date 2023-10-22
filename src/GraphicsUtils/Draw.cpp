@@ -65,19 +65,31 @@ void DrawMenu()
 
 	if (!THacks.T_ShowMenu)
 	{
-		DrawTextF("F1 To show Menu", MenuOffx, MenuOffy, D3DCOLOR_ARGB(255, 255, 255, 255));
+		DrawTextF("F1 <Menu Hidden>", MenuOffx, MenuOffy, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 	else
 	{
-		DrawTextF("F10 Invincibility", MenuOffx, MenuOffy + 1 * 18, THacks.T_Health ? Enabled : Disabled);
-		DrawTextF("F9 Infinite Points", MenuOffx, MenuOffy + 2 * 18, THacks.T_Point ? Enabled : Disabled);
-		DrawTextF("F8 Infinite Ammo", MenuOffx, MenuOffy + 3 * 18, THacks.T_Ammo ? Enabled : Disabled);
-		DrawTextF("F7 Save Waypoint", MenuOffx, MenuOffy + 4 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
-		DrawTextF("F6 / Alt + F6 > Teleport To Waypoint / Teleport to Previous Destination", MenuOffx,
-				MenuOffy + 5 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
-		DrawTextF("F5 InstaKill Hack", MenuOffx, MenuOffy + 6 * 18, THacks.T_IKill ? Enabled : Disabled);
-		DrawTextF("F4 ESP", MenuOffx, MenuOffy + 7 * 18, THacks.T_ESP ? Enabled : Disabled);
-		DrawTextF("F3 Rapid Fire", MenuOffx, MenuOffy + 8 * 18, THacks.T_RapidFire ? Enabled : Disabled);
+		if (THacks.T_MenuPage == 1)
+		{
+			DrawTextF("F1 <Menu Shown>", MenuOffx, MenuOffy + 0 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
+			DrawTextF("F10 Invincibility", MenuOffx, MenuOffy + 1 * 18, THacks.T_Health ? Enabled : Disabled);
+			DrawTextF("F9 Infinite Points", MenuOffx, MenuOffy + 2 * 18, THacks.T_Point ? Enabled : Disabled);
+			DrawTextF("F8 Infinite Ammo", MenuOffx, MenuOffy + 3 * 18, THacks.T_Ammo ? Enabled : Disabled);
+			DrawTextF("F7 Save Waypoint", MenuOffx, MenuOffy + 4 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
+			DrawTextF("F6 / Alt + F6 > Teleport To Waypoint / Teleport to Previous Destination", MenuOffx,
+					MenuOffy + 5 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
+			DrawTextF("F5 InstaKill Hack", MenuOffx, MenuOffy + 6 * 18, THacks.T_IKill ? Enabled : Disabled);
+			DrawTextF("F4 ESP", MenuOffx, MenuOffy + 7 * 18, THacks.T_ESP ? Enabled : Disabled);
+			DrawTextF("F3 Rapid Fire", MenuOffx, MenuOffy + 8 * 18, THacks.T_RapidFire ? Enabled : Disabled);
+			DrawTextF("Page 1", MenuOffx, MenuOffy + 9 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		else
+		{
+			DrawTextF("F1 <Menu Shown>", MenuOffx, MenuOffy + 0 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
+			DrawTextF("F10 Hide Boxes", MenuOffx, MenuOffy + 1 * 18, THacks.C_ShowBox ? Enabled : Disabled);
+			DrawTextF("Page 2", MenuOffx, MenuOffy + 2 * 18, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+
 	}
 }
 
