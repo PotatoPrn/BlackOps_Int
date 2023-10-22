@@ -20,7 +20,7 @@ void APIENTRY hkEndScene(LPDIRECT3DDEVICE9 o_pDevice)
 	if (!pDevice)
 		pDevice = o_pDevice;
 
-	DrawTextF("PotatoPrn's Black Ops Zombies", GHack.WindowWidth / 2, GHack.WindowHeight - 60, D3DCOLOR_ARGB(255, 255, 255, 255));
+	DrawTextF("PotatoPrn's Black Ops Zombies Internal Hack", GHack.WindowWidth / 2, GHack.WindowHeight - 60, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	DrawMenu();
 
